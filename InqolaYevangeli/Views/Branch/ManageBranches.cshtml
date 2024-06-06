@@ -1,0 +1,55 @@
+﻿@model List<InqolaYevangeli.Models.BranchViewModel>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: #FF7C00;">Manage Branches</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr style="background-color: #FFA34D; color: #fff;">
+                <th>Branch Name</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var branch in Model)
+            {
+                <tr>
+                    <td>@branch.BranchName</td>
+                    <td>@branch.Location</td>
+                    <td>
+                        <a href="@Url.Action( "EditBranch","AddBranch", new { id = branch.BranchID })" class="btn btn-primary btn-sm me-2">Edit</a>
+                        <a href="@Url.Action("DeleteBranch", "Branch", new { id = branch.BranchID })" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="@Url.Action("AddBranch", "AddBranch")" class="btn btn-success">Add Branch</a>
+</div>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .btn {
+        border-radius: 0.5rem;
+    }
+</style>

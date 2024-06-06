@@ -1,0 +1,25 @@
+﻿@model InqolaYevangeli.Models.AttendanceViewModel
+
+<h2>Choose Activity to Attend</h2>
+
+<form method="post" asp-action="RegisterAttendance">
+     <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label for="ActivityID">Select Activity:</label>
+        <select asp-for="ActivityID" class="form-control">
+            <option value="">Select Activity</option>
+            @foreach (var activity in ViewBag.Activities)
+            {
+                <option value="@activity.ActivityID">@activity.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2 ">
+        <label asp-for="MemberID">Member ID:</label>
+        <input asp-for="MemberID" class="form-control" placeholder="Enter member ID" />
+        <span asp-validation-for="MemberID" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Register Attendance</button>
+</form>

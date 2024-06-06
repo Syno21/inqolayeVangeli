@@ -1,0 +1,133 @@
+﻿@model InqolaYevangeli.Models.AddBranchViewModel
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: #FF7C00;">Add Branch</h2>
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="form">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label asp-for="BranchName" style="color: #FF7C00;">Branch Name</label>
+                    <input asp-for="BranchName" class="form-control" />
+                    <span asp-validation-for="BranchName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Location" style="color: #FF7C00;">Location</label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Country" for="Country" style="color: #FF7C00;">Country</label>
+                    <select asp-for="Country" id="Country" class="form-control">
+                        <option value="">Select Country</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="State" style="color: #FF7C00;">State</label>
+                    <select asp-for="State"  id="State" class="form-control">
+                        <option  value="">Select State</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Fetch countries and populate the country dropdown
+            $.ajax({
+                url: 'https://countriesnow.space/api/v0.1/countries',
+                type: 'GET',
+                success: function (result) {
+                    console.log('Countries API response:', result);
+                    if (!result || !result.data) {
+                        console.error('Invalid API response:', result);
+                        return;
+                    }
+                    var countries = result.data;
+                    var countryDropdown = $('#Country');
+                    countryDropdown.empty();
+                    countryDropdown.append($('<option>').text('Select Country').val(''));
+                    $.each(countries, function (index, country) {
+                        countryDropdown.append($('<option>').text(country.country).val(country.country));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Countries API request failed:', status, error);
+                    console.error('Response:', xhr.responseText);
+                }
+            });
+
+            // Event handler for when a country is selected
+            $('#Country').change(function () {
+                var selectedCountry = $(this).val();
+                var stateDropdown = $('#State');
+                stateDropdown.empty();
+                stateDropdown.append($('<option>').text('Select State').val(''));
+
+                // Fetch states for the selected country and populate the state dropdown
+                if (selectedCountry !== '') {
+                    $.ajax({
+                        url: 'https://countriesnow.space/api/v0.1/countries/states',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ country: selectedCountry }),
+                        success: function (result) {
+                            console.log('States API response:', result);
+                            if (!result || !result.data || !result.data.states) {
+                                console.error('Invalid states API response:', result);
+                                return;
+                            }
+                            var states = result.data.states;
+                            $.each(states, function (index, state) {
+                                stateDropdown.append($('<option>').text(state.name).val(state.state_code));
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('States API request failed:', status, error);
+                            console.error('Response:', xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn {
+        border-radius: 0.5rem;
+    }
+</style>

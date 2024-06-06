@@ -1,0 +1,128 @@
+﻿@model InqolaYevangeli.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #5585b5, #5e63b6);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background-color: #fafafa;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-title {
+            color: #5e63b6;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .form-label {
+            color: #5e63b6;
+            font-weight: bold;
+            text-align: left;
+            width: 100%;
+            display: inline-block;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+        }
+
+            .form-control:focus {
+                border-color: #5e63b6;
+                box-shadow: 0 0 0 0.2rem rgba(94, 99, 182, 0.25);
+            }
+
+        .btn-primary {
+            background-color: #5e63b6;
+            border: none;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+            .btn-primary:hover {
+                background-color: #4b519a;
+                transform: translateY(-2px);
+            }
+
+        .text-muted {
+            color: #5e63b6 !important;
+            display: block;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2 class="login-title">Login</h2>
+        <form method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3 text-left">
+                <label asp-for="Username" class="form-label">Username</label>
+                <input asp-for="Username" class="form-control" required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 text-left">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+
+            <div class="text-muted mt-3">
+                <a asp-action="ForgotPassword" asp-controller="Account" class="text-muted">Forgot your password?</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+</body>

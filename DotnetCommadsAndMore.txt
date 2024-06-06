@@ -1,0 +1,5 @@
+1. Add-Migration  secondMigration  //to add a migration to the database 
+2. Update-Database                 //to make the migration changes appear on the database 1 then this line in that order
+3.
+4.
+5.

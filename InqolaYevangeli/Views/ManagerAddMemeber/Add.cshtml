@@ -1,0 +1,122 @@
+﻿@model InqolaYevangeli.Models.AddMemberViewModel
+
+
+@{
+    ViewBag.Title = "Add Member";
+}
+
+
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - InqolaYevangeli</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/InqolaYevangeli.styles.css" asp-append-version="true" />
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">InqolaYevangeli</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="BranchManagerDashboard" asp-action="ManagerDashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="MemberManagement" asp-action="ManageMembers">Manage_Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Manage_Activities</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <h2>Add Member</h2>
+    <hr />
+    <form method="post" class="form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName">Last Name</label>
+            <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DateOfBirth">Date of Birth</label>
+            <input asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Gender">Gender</label>
+            <select asp-for="Gender" class="form-control">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+
+        <!--  <div class="form-group">
+            <label asp-for="BranchID">Branch</label>
+            <select asp-for="BranchID"  class="form-control">
+                <option value="">Select Branch</option>
+            </select>
+            <span asp-validation-for="BranchID" class="text-danger"></span>
+        </div>-->
+
+        <div class="form-group">
+            <label asp-for="StatusID">Status</label>
+            <select asp-for="StatusID" class="form-control">
+                <option value="">Select Status</option>
+                @if (ViewBag.MembershipStatuses != null)
+                {
+                    foreach (var status in ViewBag.MembershipStatuses)
+                    {
+                        <option value="@status.StatusID">@status.StatusName</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="StatusID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BranchID">Branch</label>
+            <select asp-for="BranchID" class="form-control">
+                <option value="0">Select Branch</option>
+                @if (ViewBag.Branches != null)
+                {
+                    foreach (var branch in ViewBag.Branches)
+                    {
+                        <option value="@branch.BranchID">@branch.BranchName</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="BranchID" class="text-danger"></span>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+</div>

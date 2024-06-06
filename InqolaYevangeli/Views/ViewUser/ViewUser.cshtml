@@ -1,0 +1,159 @@
+﻿@model List<InqolaYevangeli.Models.Entities.Members.User>
+
+<div class="container mt-5">
+    <h2 class="text-center text-success">View Users</h2>
+    <hr />
+
+    <div class="text-center mb-4">
+        <a href="@Url.Action("AddUser", "AddUser")" class="btn btn-success btn-lg rounded-pill shadow-sm">Add New User</a>
+    </div>
+
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-6">
+            <label for="branchFilter" class="form-label">Filter by Branch:</label>
+            <select id="branchFilter" class="form-select" onchange="location = this.value;">
+                <option value="@Url.Action("ViewUser", "ViewUser")">All Branches</option>
+                @foreach (var branch in ViewBag.Branches)
+                {
+                    <option value="@Url.Action("ViewUser", "ViewUser", new { branchId = branch.BranchID })">@branch.BranchName</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-sm rounded">
+            <thead class="table-success">
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserID</td>
+                        <td>@user.Username</td>
+                        <td>@user.Password</td>
+                        <td>@user.Role</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="User Actions">
+                                <a asp-controller="AddUser" asp-action="Edit" asp-route-id="@user.UserID" class="btn btn-primary rounded-pill shadow-sm">Edit</a>
+                                <a asp-controller="ViewUser" asp-action="Delete" asp-route-id="@user.UserID" class="btn btn-danger rounded-pill shadow-sm">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        font-weight: 300;
+    }
+
+    hr {
+        border: 1px solid #FF7C00;
+        margin-bottom: 40px;
+    }
+
+    .form-label {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .form-select {
+        padding: 10px;
+        font-size: 1.1em;
+        border: 1px solid #FF7C00;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-select:hover {
+        transform: scale(1.02);
+    }
+
+    .btn-success {
+        background-color: #FF7C00;
+        border-color: #FFA34D;
+        font-size: 1.1em;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-success:hover {
+            background-color: #FFA34D;
+        transform: translateY(-2px);
+    }
+
+    .btn-lg {
+        padding: 0.5rem 2rem;
+    }
+
+    .rounded-pill {
+        border-radius: 50rem;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+
+    .table th, .table td {
+        padding: 1.5rem;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .table thead th {
+            background-color: #FF7C00;
+        color: #fff;
+            border-color: #FFA34D;
+    }
+
+    .btn-primary, .btn-danger {
+        font-size: 1.1em;
+        transition: transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover, .btn-danger:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+   
+</style>

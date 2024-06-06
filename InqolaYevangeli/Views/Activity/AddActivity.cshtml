@@ -1,0 +1,85 @@
+﻿@model InqolaYevangeli.Models.AddActivityViewModel
+
+@{
+    ViewData["Title"] = Model.ActivityID == 0 ? "Add Activity" : "Edit Activity";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="container">
+    <form method="post" class="needs-validation" novalidate>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label asp-for="Name" class="form-label">Activity Name</label>
+            <input asp-for="Name" class="form-control" required />
+            <div class="invalid-feedback">Please enter an activity name.</div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" required></textarea>
+            <div class="invalid-feedback">Please enter a description.</div>
+            <span asp-validation-for="Description"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="StartDate" class="form-label">Start Date</label>
+            <input asp-for="StartDate" type="date" class="form-control" required />
+            <div class="invalid-feedback">Please enter a start date.</div>
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EndDate" class="form-label">End Date</label>
+            <input asp-for="EndDate" type="date" class="form-control" required />
+            <div class="invalid-feedback">Please enter an end date.</div>
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <!--   <div class="form-group">
+            <label asp-for="Time" class="form-label">Time</label>
+            <input asp-for="Time" type="time" class="form-control" required />
+            <div class="invalid-feedback">Please enter a time.</div>
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div> -->
+
+        <!--  <div class="form-group">
+            <label asp-for="UserID" class="form-label">User</label>
+            <select asp-for="UserID" class="form-control" required>
+                <option value="">Select User</option>
+                @if (ViewBag.Users != null)
+                {
+                    foreach (var user in ViewBag.Users)
+                    {
+                        <option value="@user.UserID">@user.Username</option>
+                    }
+                }
+            </select>
+            <div class="invalid-feedback">Please select a user.</div>
+            <span asp-validation-for="UserID" class="text-danger"></span>
+        </div> -->
+
+        <div class="form-group">
+            <label asp-for="BranchID" class="form-label">Branch</label>
+            <select asp-for="BranchID" class="form-control" required>
+                <option value="">Select Branch</option>
+                @if (ViewBag.Branches != null)
+                {
+                    foreach (var branch in ViewBag.Branches)
+                    {
+                        <option value="@branch.BranchID">@branch.BranchName</option>
+                    }
+                }
+            </select>
+            <div class="invalid-feedback">Please select a branch.</div>
+            <span asp-validation-for="BranchID" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">@ViewData["Title"]</button>
+    </form>
+</div>

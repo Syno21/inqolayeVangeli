@@ -1,0 +1,104 @@
+﻿@model InqolaYevangeli.Models.AddUserViewModel
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-orange text-white">
+                    <h2 class="mb-0">Add User</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label asp-for="UserID" class="form-label font-weight-bold">User ID</label>
+                            <input asp-for="UserID" class="form-control" required />
+                            <div class="invalid-feedback">Please enter a User ID.</div>
+                            <span asp-validation-for="UserID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Username" class="form-label font-weight-bold">Username</label>
+                            <input asp-for="Username" class="form-control" required />
+                            <div class="invalid-feedback">Please enter a username.</div>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="form-label font-weight-bold">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" required />
+                            <div class="invalid-feedback">Please enter a password.</div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Role" class="form-label font-weight-bold">Role</label>
+                            <select id="Role" asp-for="Role" class="form-control" required>
+                                <option value="">Select Role</option>
+                                <option value="Super Admin">Super Admin</option>
+                                <option value="Branch Manager">Branch Manager</option>
+                                <option value="Regular User">Regular User</option>
+                            </select>
+                        </div>
+                        @if (Model.Role != "Super Admin")
+                        {
+                            <div id="branchSelection" class="form-group" style="display: none;">
+                                <label asp-for="BranchID" class="form-label font-weight-bold">Branch</label>
+                                <select asp-for="BranchID" class="form-control">
+                                    <option value="0">Select Branch</option>
+                                    @if (ViewBag.Branches != null)
+                                    {
+                                        foreach (var branch in ViewBag.Branches)
+                                        {
+                                            <option value="@branch.BranchID">@branch.BranchName</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="BranchID" class="text-danger"></span>
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-orange btn-block mt-4">Add User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-orange {
+        background-color: #FF7C00;
+    }
+
+    .btn-orange {
+        background-color: #FFA34D;
+        color: #fff;
+    }
+
+        .btn-orange:hover {
+            background-color: #ff9933;
+            color: #fff;
+        }
+</style>
+
+<script>
+    // Get the role dropdown element
+    var roleDropdown = document.getElementById("Role");
+    // Add change event listener to the role dropdown
+    roleDropdown.addEventListener("change", function () {
+        // Get the selected role
+        var selectedRole = roleDropdown.value;
+        // Get the branch selection div
+        var branchSelectionDiv = document.getElementById("branchSelection");
+        // Toggle visibility based on the selected role
+        if (selectedRole === "Super Admin") {
+            branchSelectionDiv.style.display = "none";
+        } else {
+            branchSelectionDiv.style.display = "block";
+        }
+    });
+    // Optionally, initialize visibility based on the initial value of the role
+    var initialRole = roleDropdown.value;
+    var branchSelectionDiv = document.getElementById("branchSelection");
+    if (initialRole === "Super Admin") {
+        branchSelectionDiv.style.display = "none";
+    }
+</script>

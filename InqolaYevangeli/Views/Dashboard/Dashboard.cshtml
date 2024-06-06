@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f4f7;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #FF7C00;
+        font-size: 2.5em;
+        margin: 0;
+    }
+
+    hr {
+        border: 1px solid #FF7C00;
+        margin-bottom: 40px;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+    .card-header {
+        background: #FF7C00;
+        color: #fff;
+        font-size: 1.25em;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin: 10px 0;
+    }
+
+    #membershipChart {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <h2>Dashboard</h2>
+        <hr />
+    </div>
+
+    <!-- Membership Statistics -->
+    <div class="card">
+        <div class="card-header">
+            Membership Statistics
+        </div>
+        <div class="card-body">
+            <p>Total Members Across all Branches: <strong>@ViewBag.TotalMembers</strong></p>
+            <p>Active Members: <strong>@ViewBag.ActiveMembers</strong></p>
+            <p>Inactive Members: <strong>@ViewBag.InactiveMembers</strong></p>
+            <p>Users: <strong>@ViewBag.Users</strong></p>
+            <p>Total Branches: <strong>@ViewBag.TotalBranches</strong></p>
+            <!-- Add more statistics as needed -->
+        </div>
+    </div>
+
+
+    <!-- Number of Branches in Each Province -->
+    <div class="card">
+        <div class="card-header">
+            Number of Branches in Each Province
+        </div>
+        <div class="card-body">
+            <ul>
+                @foreach (var item in ViewBag.BranchesInProvince)
+                {
+                    <li>@item.Province: <strong>@item.Count</strong> branches</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Branches Distribution Chart -->
+    <div class="card">
+        <div class="card-header">
+            Branches Distribution
+        </div>
+        <div class="card-body">
+            <canvas id="branchesChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var ctx = document.getElementById('branchesChart').getContext('2d');
+        var branchesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Json.Serialize(ViewBag.ChartLabels)),
+                datasets: [{
+                    label: 'Number of Branches',
+                    data: @Html.Raw(Json.Serialize(ViewBag.ChartData)),
+                    backgroundColor: 'rgba(255, 124, 0, 0.2)',
+                    borderColor: 'rgba(255, 124, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}
