@@ -1,7 +1,7 @@
 ﻿@model InqolaYevangeli.Models.AddBranchViewModel
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4" style="color: #FF7C00;">Add Branch</h2>
+    <h2 class="text-center mb-4" style="color: cornflowerblue;">Add Branch</h2>
     <hr />
 
     <div class="row justify-content-center">
@@ -10,33 +10,45 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                 @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    <label asp-for="BranchName" style="color: #FF7C00;">Branch Name</label>
-                    <input asp-for="BranchName" class="form-control" />
-                    <span asp-validation-for="BranchName" class="text-danger"></span>
+                <div class="form-group row">
+                    <label for="BranchName" class="col-sm-3 col-form-label" style="color: cornflowerblue;">Branch Name</label>
+                    <div class="col-sm-9">
+                        <input asp-for="BranchName" id="BranchName" class="form-control" />
+                        <span asp-validation-for="BranchName" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="Location" style="color: #FF7C00;">Location</label>
-                    <input asp-for="Location" class="form-control" />
-                    <span asp-validation-for="Location" class="text-danger"></span>
+                <div class="form-group row">
+                    <label for="Location" class="col-sm-3 col-form-label" style="color: cornflowerblue;">Location</label>
+                    <div class="col-sm-9">
+                        <input asp-for="Location" id="Location" class="form-control" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="Country" for="Country" style="color: #FF7C00;">Country</label>
-                    <select asp-for="Country" id="Country" class="form-control">
-                        <option value="">Select Country</option>
-                    </select>
+                <div class="form-group row">
+                    <label for="Country" class="col-sm-3 col-form-label" style="color: cornflowerblue;">Country</label>
+                    <div class="col-sm-9">
+                        <select asp-for="Country" id="Country" class="form-control">
+                            <option value="">Select Country</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="State" style="color: #FF7C00;">State</label>
-                    <select asp-for="State"  id="State" class="form-control">
-                        <option  value="">Select State</option>
-                    </select>
+                <div class="form-group row">
+                    <label for="State" class="col-sm-3 col-form-label" style="color: cornflowerblue;">State</label>
+                    <div class="col-sm-9">
+                        <select asp-for="State" id="State" class="form-control">
+                            <option value="">Select State</option>
+                        </select>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-success mt-3">Submit</button>
+                <div class="form-group row">
+                    <div class="offset-sm-3 col-sm-9">
+                        <button type="submit" class="btn  mt-3">Submit</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -106,9 +118,6 @@
 }
 
 
-
-
-
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -123,11 +132,30 @@
         font-weight: bold;
     }
 
-    .form-group label {
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
         font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
     }
 
     .btn {
-        border-radius: 0.5rem;
+        border-radius: 5px;
+        padding: 10px 20px;
+        background-color: #4b519a;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        width: 400px;
     }
 </style>

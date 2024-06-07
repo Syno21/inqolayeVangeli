@@ -4,10 +4,6 @@
     <h2 class="text-center text-success">View Users</h2>
     <hr />
 
-    <div class="text-center mb-4">
-        <a href="@Url.Action("AddUser", "AddUser")" class="btn btn-success btn-lg rounded-pill shadow-sm">Add New User</a>
-    </div>
-
     <div class="row mb-4 justify-content-center">
         <div class="col-md-6">
             <label for="branchFilter" class="form-label">Filter by Branch:</label>
@@ -51,6 +47,9 @@
             </tbody>
         </table>
     </div>
+    <div class="text-center mb-4">
+        <a href="@Url.Action("AddUser", "AddUser")" class="btn btn-success btn-lg rounded-pill shadow-sm">Add New User</a>
+    </div>
 </div>
 
 <style>
@@ -69,7 +68,7 @@
     }
 
     hr {
-        border: 1px solid #FF7C00;
+        border: 1px solid #5585b5;
         margin-bottom: 40px;
     }
 
@@ -81,8 +80,7 @@
     .form-select {
         padding: 10px;
         font-size: 1.1em;
-        border: 1px solid #FF7C00;
-        border-radius: 5px;
+        border: 1px solid #5585b5 border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out;
     }
@@ -92,15 +90,16 @@
     }
 
     .btn-success {
-        background-color: #FF7C00;
+        background-color: #4b519a;
         border-color: #FFA34D;
         font-size: 1.1em;
         transition: background-color 0.3s, transform 0.3s;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 800px;
     }
 
     .btn-success:hover {
-            background-color: #FFA34D;
+            background-color: #5585b5;
         transform: translateY(-2px);
     }
 
@@ -136,7 +135,7 @@
     }
 
     .table thead th {
-            background-color: #FF7C00;
+            background-color: #5585b5;
         color: #fff;
             border-color: #FFA34D;
     }

@@ -15,9 +15,6 @@
                 }
             </select>
         </div>
-        <div class="col-md-6 text-end">
-            <a href="@Url.Action("AddMember", "Member")" class="btn btn-success">Add New Member</a>
-        </div>
     </div>
 
     <div class="table-responsive">
@@ -54,6 +51,9 @@
             </tbody>
         </table>
     </div>
+    <div class="col-md-6 text-end">
+        <a href="@Url.Action("AddMember", "Member")" class="btn btn-success">Add New Member</a>
+    </div>
 </div>
 
 <style>
@@ -83,21 +83,22 @@
     .form-select {
         padding: 10px;
         font-size: 1.1em;
-        border: 1px solid #FF7C00;
+        border: 1px solid #5585b5;
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .btn-success {
-        background-color: #FF7C00;
-        border-color: #FF7C00;
+        background-color: #4b519a;
+        border-color: #5585b5;
         font-size: 1.1em;
         transition: background-color 0.3s, transform 0.3s;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 700px;
     }
 
     .btn-success:hover {
-            background-color: #FFA34D;
+            background-color: #5585b5;
         transform: translateY(-2px);
     }
 
@@ -119,7 +120,7 @@
     }
 
     .table thead th {
-            background-color: #FF7C00;
+            background-color: #5585b5;
         color: #fff;
             border-color: #FFA34D;
     }

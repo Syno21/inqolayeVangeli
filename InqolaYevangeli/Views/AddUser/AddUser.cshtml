@@ -64,19 +64,44 @@
 </div>
 
 <style>
-    .bg-orange {
-        background-color: #FF7C00;
+    .form-group {
+        margin-bottom: 20px;
+        position: relative;
     }
 
-    .btn-orange {
-        background-color: #FFA34D;
+    .form-label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: cornflowerblue;
+        margin: 0;
+    }
+
+    .form-control {
+        width: calc(100% - 135px); /* Adjust based on label width */
+        margin-left: 135px; /* Same as label width */
+    }
+
+    .invalid-feedback {
+        display: none;
+        color: #dc3545;
+        margin-top: 5px;
+    }
+
+    .form-group.invalid .invalid-feedback {
+        display: block;
+    }
+
+    .btn {
+        border-radius: 5px;
+        padding: 10px 20px;
+        background-color: #4b519a;
         color: #fff;
+        border: none;
+        cursor: pointer;
+        width: 700px;
     }
-
-        .btn-orange:hover {
-            background-color: #ff9933;
-            color: #fff;
-        }
 </style>
 
 <script>

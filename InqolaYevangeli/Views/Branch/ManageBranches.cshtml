@@ -1,7 +1,7 @@
 ﻿@model List<InqolaYevangeli.Models.BranchViewModel>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4" style="color: #FF7C00;">Manage Branches</h2>
+    <h2 class="text-center mb-4" style="color: #5585b5;">Manage Branches</h2>
 
     <table class="table table-striped table-bordered">
         <thead>
@@ -19,7 +19,7 @@
                     <td>@branch.Location</td>
                     <td>
                         <a href="@Url.Action( "EditBranch","AddBranch", new { id = branch.BranchID })" class="btn btn-primary btn-sm me-2">Edit</a>
-                        <a href="@Url.Action("DeleteBranch", "Branch", new { id = branch.BranchID })" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="@Url.Action("DeleteBranch", "Branch", new { id = branch.BranchID })"  class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
             }
@@ -47,9 +47,19 @@
     .table td {
         text-align: center;
         vertical-align: middle;
+        background-color: #5585b5;
+        border-color: #5585b5;
     }
 
     .btn {
         border-radius: 0.5rem;
+        background-color: #5585b5;
+        border-color: #5585b5;
+        width: 700px;
     }
+
+        .btn:hover {
+            background-color: #4b519a;
+            border-color: #4b519a;
+        }
 </style>

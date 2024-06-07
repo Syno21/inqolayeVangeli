@@ -9,6 +9,27 @@
 @{
     Layout = null;
 }
+<style>
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group select {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+    .navbar{
+        background-color cornflowerblue;
+    }
+</style>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +40,7 @@
 </head>
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">InqolaYevangeli</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"

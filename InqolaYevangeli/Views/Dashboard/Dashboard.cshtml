@@ -12,42 +12,28 @@
     }
 
     .container {
-        max-width: 1200px;
-        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         padding: 20px;
     }
 
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    h2 {
-        color: #FF7C00;
-        font-size: 2.5em;
-        margin: 0;
-    }
-
-    hr {
-        border: 1px solid #FF7C00;
-        margin-bottom: 40px;
-    }
-
     .card {
+        flex: 0 0 calc(33.333% - 20px); /* Adjust width as needed */
         background: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
+        margin: 0 10px 20px;
         overflow: hidden;
         transition: transform 0.3s;
     }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
+    .card:hover {
+        transform: translateY(-10px);
+    }
 
     .card-header {
-        background: #FF7C00;
+        background: #5585b5;
         color: #fff;
         font-size: 1.25em;
         padding: 15px;
@@ -58,11 +44,7 @@
         padding: 20px;
     }
 
-    p {
-        font-size: 1.1em;
-        line-height: 1.6;
-        margin: 10px 0;
-    }
+    
 
     #membershipChart {
         max-width: 100%;
@@ -70,13 +52,14 @@
     }
 </style>
 
-<div class="container">
-    <div class="header">
-        <h2>Dashboard</h2>
-        <hr />
-    </div>
+<div class="header">
+    <h2>Dashboard</h2>
+    <hr />
+</div>
 
-    <!-- Membership Statistics -->
+<div class="container">
+
+
     <div class="card">
         <div class="card-header">
             Membership Statistics
@@ -87,12 +70,9 @@
             <p>Inactive Members: <strong>@ViewBag.InactiveMembers</strong></p>
             <p>Users: <strong>@ViewBag.Users</strong></p>
             <p>Total Branches: <strong>@ViewBag.TotalBranches</strong></p>
-            <!-- Add more statistics as needed -->
         </div>
     </div>
 
-
-    <!-- Number of Branches in Each Province -->
     <div class="card">
         <div class="card-header">
             Number of Branches in Each Province
@@ -107,8 +87,6 @@
         </div>
     </div>
 
-
-    <!-- Branches Distribution Chart -->
     <div class="card">
         <div class="card-header">
             Branches Distribution
@@ -125,24 +103,47 @@
     <script>
         var ctx = document.getElementById('branchesChart').getContext('2d');
         var branchesChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie', // Change chart type to 'pie'
             data: {
                 labels: @Html.Raw(Json.Serialize(ViewBag.ChartLabels)),
                 datasets: [{
                     label: 'Number of Branches',
                     data: @Html.Raw(Json.Serialize(ViewBag.ChartData)),
-                    backgroundColor: 'rgba(255, 124, 0, 0.2)',
-                    borderColor: 'rgba(255, 124, 0, 1)',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
                     borderWidth: 1
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
                     }
                 }
             }
         });
     </script>
 }
+

@@ -20,7 +20,7 @@
         }
 
         .navbar {
-            background-color: #1e7e34;
+            background-color: #5585b5; /* Changed navbar background color */
         }
 
         .navbar-brand,
@@ -29,13 +29,13 @@
         }
 
         .btn-primary {
-            background-color: #1e7e34;
-            border-color: #1e7e34;
+            background-color: #5585b5; /* Changed primary button background color */
+            border-color: #5585b5; /* Changed primary button border color */
         }
 
             .btn-primary:hover {
-                background-color: #186628;
-                border-color: #186628;
+                background-color: #4b519a; /* Changed primary button hover background color */
+                border-color: #4b519a; /* Changed primary button hover border color */
             }
 
         .btn-warning {
@@ -53,6 +53,15 @@
         .table {
             background-color: #fff;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+            .table th,
+            .table td {
+                border-color: #5585b5; /* Changed table border color */
+            }
+
+        #but{
+            width:700px;
         }
     </style>
 </head>
@@ -83,9 +92,7 @@
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Manage Activities</h2>
-            <a asp-action="AddActivity" class="btn btn-primary">
-                <i class="bi bi-plus-circle me-2"></i>Add Activity
-            </a>
+            
         </div>
         <table class="table table-hover">
             <thead>
@@ -120,6 +127,10 @@
             </tbody>
         </table>
     </div>
+    <center>
+        <a asp-action="AddActivity" id="but" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-2"></i>Add Activity
+    </a></center>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
